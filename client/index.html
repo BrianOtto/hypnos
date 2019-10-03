@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hypnos</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="index.css" rel="stylesheet">
+    
+    <script src="socket.io.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div id="info">
+            <div id="name">Snocrash</div>
+            
+            <div class="rows">
+                <div class="tabs">
+                    <div class="head">
+                        <div class="active" data-id="map">Map</div>
+                        <div data-id="inventory">Inventory</div>
+                        <div data-id="equipment">Equipment</div>
+                    </div>
+                    
+                    <div class="body" id="map">Map</div>
+                    <div class="body" id="inventory" style="display: none">Inventory</div>
+                    <div class="body" id="equipment" style="display: none">Equipment</div>
+                </div>
+                
+                <div class="tabs">
+                    <div class="head">
+                        <div class="active" data-id="stats">Stats</div>
+                        <div data-id="skills">Skills</div>
+                    </div>
+                    
+                    <div class="body" id="stats">Stats</div>
+                    <div class="body" id="skills" style="display: none">Skills</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="view">
+            <div id="console"></div>
+            
+            <div>
+                <textarea rows="1"></textarea>
+            </div>
+        </div>
+        
+        <div id="chat">
+            <div class="rows">
+                <div class="tabs">
+                    <div class="head">
+                        <div class="active" data-id="channel-chat">Chat</div>
+                        <div data-id="channel-private">Private</div>
+                        <div data-id="channel-global">Global</div>
+                    </div>
+                    
+                    <div class="body channel" id="channel-chat">
+                        <div>Chat</div>
+                        <div><textarea rows="1"></textarea></div>
+                    </div>
+                    
+                    <div class="body channel" id="channel-private" style="display: none">
+                        <div>Private</div>
+                        <div><textarea rows="1"></textarea></div>
+                    </div>
+                    
+                    <div class="body channel" id="channel-global" style="display: none">
+                        <div>Global</div>
+                        <div><textarea rows="1"></textarea></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="index.js"></script>
+</body>
+
+</html>

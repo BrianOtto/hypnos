@@ -1,0 +1,110 @@
+html {
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+textarea {
+    width: calc(100% - 15px);
+    background-color: #18181F;
+    color: #F5EEE2;
+    padding: 5px;
+    border: 1px solid #F5EEE2;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    background-color: #18181F;
+    color: #F5EEE2;
+    height: 100vh;
+}
+
+#info {
+    display: grid;
+    grid-template-rows: 60px auto;
+    padding-bottom: 15px;
+}
+
+#info > div {
+    padding: 15px;
+    padding-right: 20px;
+}
+
+#info > #name {
+    background-color: #F5EEE2;
+    color: #323844;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#info > .rows {
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-row-gap: 15px;
+}
+
+.tabs {
+    display: grid;
+    grid-template-rows: 30px auto;
+    grid-row-gap: 15px;
+}
+
+.tabs > .head {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25px, max-content));
+    grid-column-gap: 25px;
+    font-size: 0.9rem;
+}
+
+.tabs > .head > div {
+    padding: 0px 10px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.tabs > .head > div:hover,
+.tabs > .head > div.active {
+    border-bottom: 1px solid #39F;
+}
+
+.tabs > .body {
+    background-color: #323844;
+    font-size: 0.9rem;
+    padding: 10px;
+}
+
+#view {
+    background-color: #323844;
+    display: grid;
+    grid-template-rows: auto 50px;
+    grid-row-gap: 15px;
+    align-items: end;
+    padding: 15px;
+}
+
+#chat {
+    display: grid;
+    grid-template-rows: 100%;
+}
+
+#chat > div {
+    padding: 15px 15px 0px 20px;
+}
+
+#chat > .rows {
+    display: grid;
+    grid-template-rows: 100%;
+}
+
+#chat .channel {
+    display: grid;
+    grid-template-rows: auto 50px;
+    grid-row-gap: 15px;
+    align-items: end;
+    padding: 15px;
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Hypnos",
+    "license": "ISC",
+    "version": "0.1.0",
+    "description": "A dream about a MUD.",
+    "repository": "https://github.com/BrianOtto/hypnos.git",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^2.3.0"
+    }
+}
