@@ -9,18 +9,12 @@ body {
 }
 
 textarea {
-    width: calc(100% - 30px);
-    padding: 13px;
+    width: calc(100% - 13px);
     background-color: #18181F;
     border: 1px solid #F5EEE2;
     color: #F5EEE2;
-}
-
-@-moz-document url-prefix() {
-    textarea {
-        width: calc(100% - 15px);
-        padding: 5px;
-    }
+    padding: 5px;
+    height: 30px;
 }
 
 #main {
