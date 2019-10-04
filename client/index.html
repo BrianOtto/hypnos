@@ -25,9 +25,37 @@
                         <div data-id="equipment">Equipment</div>
                     </div>
                     
-                    <div class="body" id="map">Map</div>
-                    <div class="body" id="inventory" style="display: none">Inventory</div>
-                    <div class="body" id="equipment" style="display: none">Equipment</div>
+                    <div class="body" data-type="block" id="map">
+                        <table cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td id="map-rooms"></td>
+                            
+                            <td id="map-nav">
+                                <div id="map-compass">&#8679;<br><span>N</span></div>
+                                
+                                <br><br>
+                                
+                                <div class="map-icon">
+                                    <div class="map-icon-you">&#9679;</div>
+                                </div><br>You
+                                
+                                <br><br>
+                                
+                                <div class="map-icon">
+                                    <div class="map-icon-group">&#9964;</div>
+                                </div><br>Group
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="map-name" colspan="2">
+                                An Endless Void
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="body" data-type="block" id="inventory" style="display: none">Inventory</div>
+                    <div class="body" data-type="block" id="equipment" style="display: none">Equipment</div>
                 </div>
                 
                 <div class="tabs">
@@ -36,8 +64,8 @@
                         <div data-id="skills">Skills</div>
                     </div>
                     
-                    <div class="body" id="stats">Stats</div>
-                    <div class="body" id="skills" style="display: none">Skills</div>
+                    <div class="body" data-type="block" id="stats">Stats</div>
+                    <div class="body" data-type="block" id="skills" style="display: none">Skills</div>
                 </div>
             </div>
         </div>
@@ -59,17 +87,17 @@
                         <div data-id="channel-global">Global</div>
                     </div>
                     
-                    <div class="body channel" id="channel-chat">
+                    <div class="body channel" data-type="grid" id="channel-chat">
                         <div>Chat</div>
                         <div><textarea rows="1"></textarea></div>
                     </div>
                     
-                    <div class="body channel" id="channel-private" style="display: none">
+                    <div class="body channel" data-type="grid" id="channel-private" style="display: none">
                         <div>Private</div>
                         <div><textarea rows="1"></textarea></div>
                     </div>
                     
-                    <div class="body channel" id="channel-global" style="display: none">
+                    <div class="body channel" data-type="grid" id="channel-global" style="display: none">
                         <div>Global</div>
                         <div><textarea rows="1"></textarea></div>
                     </div>

@@ -9,16 +9,23 @@ body {
 }
 
 textarea {
-    width: calc(100% - 15px);
+    width: calc(100% - 30px);
+    padding: 13px;
     background-color: #18181F;
-    color: #F5EEE2;
-    padding: 5px;
     border: 1px solid #F5EEE2;
+    color: #F5EEE2;
+}
+
+@-moz-document url-prefix() {
+    textarea {
+        width: calc(100% - 15px);
+        padding: 5px;
+    }
 }
 
 #main {
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 395px 50% auto;
     background-color: #18181F;
     color: #F5EEE2;
     height: 100vh;
@@ -31,8 +38,7 @@ textarea {
 }
 
 #info > div {
-    padding: 15px;
-    padding-right: 20px;
+    padding: 15px 20px 0px 15px;
 }
 
 #info > #name {
@@ -44,7 +50,7 @@ textarea {
 
 #info > .rows {
     display: grid;
-    grid-template-rows: 60% 40%;
+    grid-template-rows: 391px auto;
     grid-row-gap: 15px;
 }
 
@@ -69,13 +75,87 @@ textarea {
 
 .tabs > .head > div:hover,
 .tabs > .head > div.active {
-    border-bottom: 1px solid #39F;
+    border-bottom: 1px solid #3399FF;
 }
 
 .tabs > .body {
     background-color: #323844;
     font-size: 0.9rem;
     padding: 10px;
+}
+
+#info #map {
+    overflow: hidden;
+}
+
+#info #map table {
+    width: 100%;
+    height: 100%;
+}
+
+#info #map td {
+    box-sizing: border-box;
+}
+
+#info #map-rooms {
+    background-color: #F5EEE2;
+    padding: 10px;
+}
+
+#info #map .map-room {
+    background-color: #F5EEE2;
+    padding: 2px;
+    height: 13px;
+    width: 13px;
+}
+
+#info #map #map-name {
+    vertical-align: bottom;
+    height: 30px;
+}
+
+#info #map #map-nav {
+    font-size: 0.8rem;
+    vertical-align: top;
+    text-align: center;
+    padding-left: 10px;
+    width: 50px;
+}
+
+#info #map #map-nav #map-compass {
+    font-size: 2.0rem;
+    margin-top: -5px;
+}
+
+#info #map #map-nav #map-compass > span {
+    font-weight: bold;
+}
+
+@-moz-document url-prefix() {
+    #info #map #map-nav #map-compass {
+        margin-top: -12px;
+        font-weight: bold;
+    }
+}
+
+#info #map #map-nav .map-icon {
+    font-size: 0.8rem;
+    padding: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+    background-color: #3399FF;
+    border: 4px double #18181F;
+    color: #18181F;
+    height: 13px;
+    width: 13px;
+}
+
+#info #map #map-nav .map-icon > .map-icon-you {
+    margin-top: -1px;
+}
+
+#info #map #map-nav .map-icon > .map-icon-group {
+    margin-top: -2px;
 }
 
 #view {
