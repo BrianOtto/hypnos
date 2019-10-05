@@ -103,6 +103,19 @@ textarea {
     width: 13px;
 }
 
+#info #map .map-room.active {
+    background-color: #3399FF;
+    border: 4px double #18181F;
+}
+
+#info #map .map-room.active-inner-bottom {
+    border-bottom: 1px solid #C0C0C0;
+}
+
+#info #map .map-room.active-inner-right {
+    border-right: 1px solid #C0C0C0;
+}
+
 #info #map #map-name {
     vertical-align: bottom;
     height: 30px;

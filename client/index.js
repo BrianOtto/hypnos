@@ -19,89 +19,32 @@ for (const th of tabHeads) {
     })
 }
 
-// generate a 12x12 grid for the map
+// generate a new 12x12 grid for the map
+function mapReset() {
+    var mapHTML = '<table cellpadding="0" cellspacing="0">'
 
-var mapArry = []
-var mapCols = 12
-var mapHTML = '<table cellpadding="0" cellspacing="0">'
-
-for (var row = 0; row < mapCols; row++) {
-    mapHTML += '<tr>'
-    
-    for (var col = 0; col < mapCols; col++) {
-        mapArry.push([row, col])
+    for (var row = 0; row < 12; row++) {
+        mapHTML += '<tr>'
         
-        mapHTML += '<td class="map-room" id="map-room-' + row + '-' + col + '"></td>'
+        for (var col = 0; col < 12; col++) {
+            mapHTML += '<td class="map-room" id="map-room-' + row + '-' + col + '"></td>'
+        }
+        
+        mapHTML += '</tr>'
     }
-    
-    mapHTML += '</tr>'
-}
 
-mapHTML += '</table>'
+    mapHTML += '</table>'
 
-var map = document.querySelector('#info #map #map-rooms')
-map.insertAdjacentHTML('beforeend', mapHTML)
-
-// randomly create 100 rooms
-
-var mapRooms = []
-
-for (var row = 0; row < 100; row++) {
-    var mapIndex = Math.floor(Math.random() * mapArry.length)
-    var mapBlock = mapArry.splice(mapIndex, 1)[0]
-    
-    var roomId = '#map-room-' + mapBlock[0] + '-' + mapBlock[1]
-    document.querySelector(roomId).style.backgroundColor = '#3399FF'
-    
-    mapRooms.push(mapBlock)
-}
-
-// add borders to the rooms
-
-var mapBorderEdge = '4px double #18181F'
-var mapBorderInside = '1px solid #C0C0C0'
-
-for (curr in mapRooms) {
-    var currRoomRow = mapRooms[curr][0]
-    var currRoomCol = mapRooms[curr][1]
-    
-    // add a double border to all rooms
-    var roomId = '#map-room-' + currRoomRow + '-' + currRoomCol
-    document.querySelector(roomId).style.border = mapBorderEdge
-    
-    // update the border to a lighter color when inside a room
-    // all the other borders will be on an outside edge
-    for (near in mapRooms) {
-        var nearRoomRow = mapRooms[near][0]
-        var nearRoomCol = mapRooms[near][1]
-        
-        // remove the border when two edges meet
-        if (nearRoomRow == currRoomRow - 1 && nearRoomCol == currRoomCol) {
-            document.querySelector(roomId).style.borderTop = 'none'
-        }
-        
-        if (nearRoomRow == currRoomRow + 1 && nearRoomCol == currRoomCol) {
-            document.querySelector(roomId).style.borderBottom = mapBorderInside
-        }
-        
-        // remove the border when two edges meet
-        if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol - 1) {
-            document.querySelector(roomId).style.borderLeft = 'none'
-        }
-        
-        if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol + 1) {
-            document.querySelector(roomId).style.borderRight = mapBorderInside
-        }
-    }
+    document.querySelector('#info #map #map-rooms').innerHTML = mapHTML
 }
 
 var socket = io('http://localhost:3000')
 
 document.querySelector('#view textarea').addEventListener('keydown', function(event) {
     if (event.keyCode == 13) {
-        socket.emit('chat', event.target.value);
-        event.target.value = ''
+        socket.emit('chat', event.target.value)
         
+        event.target.select()
         event.preventDefault()
     }
 })
@@ -113,13 +56,42 @@ socket.on('chat', function(msg) {
     document.querySelector('#view #console').appendChild(content)
 })
 
-/* TODO: get the map from the server
-
 socket.on('map', function(map) {
-    var content = document.createElement('div')
-    content.innerHTML = map
+    mapReset()
     
-    document.querySelector('#info #map #map-rooms').appendChild(content)
+    for (curr in map) {
+        var currRoomRow = map[curr][0]
+        var currRoomCol = map[curr][1]
+        
+        // add a double border to all rooms
+        var roomId = '#map-room-' + currRoomRow + '-' + currRoomCol
+        document.querySelector(roomId).classList.add('active')
+        
+        // update the border to a lighter color when inside a room
+        // otherwise all other borders will be on an outside edge
+        for (near in map) {
+            var nearRoomRow = map[near][0]
+            var nearRoomCol = map[near][1]
+            
+            // remove the border when two edges meet
+            if (nearRoomRow == currRoomRow - 1 && nearRoomCol == currRoomCol) {
+                document.querySelector(roomId).style.borderTop = 'none'
+            }
+            
+            // change to a lighter color
+            if (nearRoomRow == currRoomRow + 1 && nearRoomCol == currRoomCol) {
+                document.querySelector(roomId).classList.add('active-inner-bottom')
+            }
+            
+            // remove the border when two edges meet
+            if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol - 1) {
+                document.querySelector(roomId).style.borderLeft = 'none'
+            }
+            
+            // change to a lighter color
+            if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol + 1) {
+                document.querySelector(roomId).classList.add('active-inner-right')
+            }
+        }
+    }
 })
-
-*/
