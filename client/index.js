@@ -47,6 +47,7 @@ function mapMoveTo(loc) {
         
         var roomId = '#map-room-' + currRoomRow + '-' + currRoomCol
         document.querySelector(roomId).classList.remove('loc')
+        document.querySelector(roomId).innerHTML = ''
     }
     
     var start = document.querySelector('#map-room-' + loc[0] + '-' + loc[1])
@@ -120,6 +121,6 @@ socket.on('map', function(map) {
     socket.emit('mapStart')
 })
 
-socket.on('mapStart', function(loc) {
+socket.on('loc', function(loc) {
     mapMoveTo(loc)
 })

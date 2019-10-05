@@ -44,7 +44,7 @@ textarea {
 
 #info > .rows {
     display: grid;
-    grid-template-rows: 391px auto;
+    grid-template-rows: 415px auto;
     grid-row-gap: 15px;
 }
 
@@ -101,14 +101,14 @@ textarea {
     
     /* WARNING
      * 
-     * 22px is critical for the box sizing to 
+     * 25/22px is critical for the box sizing to 
      * maintain the same dimensions for all rooms.
      * 
      * Anything lower or higher will cause 
      * the room to distort when text is added.
      * 
      */
-    height: 22px;
+    height: 25px;
     width: 22px;
 }
 
@@ -181,6 +181,8 @@ textarea {
 
 #view {
     background-color: #323844;
+    font-size: 0.9rem;
+    line-height: 1.5;
     display: grid;
     grid-template-rows: auto 50px;
     grid-row-gap: 15px;
