@@ -1,3 +1,4 @@
+var mapRooms = []
 var tabHeads = document.querySelectorAll('.tabs > .head > div')
 
 for (const th of tabHeads) {
@@ -35,21 +36,36 @@ function mapReset() {
 
     mapHTML += '</table>'
 
-    document.querySelector('#info #map #map-rooms').innerHTML = mapHTML
+    document.querySelector('#map-rooms').innerHTML = mapHTML
+}
+
+// move to a specific location on the map
+function mapMoveTo(loc) {
+    for (curr in mapRooms) {
+        var currRoomRow = mapRooms[curr][0]
+        var currRoomCol = mapRooms[curr][1]
+        
+        var roomId = '#map-room-' + currRoomRow + '-' + currRoomCol
+        document.querySelector(roomId).classList.remove('loc')
+    }
+    
+    var start = document.querySelector('#map-room-' + loc[0] + '-' + loc[1])
+    start.classList.add('loc')
+    start.innerHTML = '&#9679;'
 }
 
 var socket = io('http://localhost:3000')
 
 document.querySelector('#view textarea').addEventListener('keydown', function(event) {
     if (event.keyCode == 13) {
-        socket.emit('chat', event.target.value)
+        socket.emit('msg', event.target.value)
         
         event.target.select()
         event.preventDefault()
     }
 })
 
-socket.on('chat', function(msg) {
+socket.on('msg', function(msg) {
     var content = document.createElement('div')
     content.innerHTML = msg
     
@@ -57,11 +73,13 @@ socket.on('chat', function(msg) {
 })
 
 socket.on('map', function(map) {
+    mapRooms = map
+    
     mapReset()
     
-    for (curr in map) {
-        var currRoomRow = map[curr][0]
-        var currRoomCol = map[curr][1]
+    for (curr in mapRooms) {
+        var currRoomRow = mapRooms[curr][0]
+        var currRoomCol = mapRooms[curr][1]
         
         // add a double border to all rooms
         var roomId = '#map-room-' + currRoomRow + '-' + currRoomCol
@@ -69,29 +87,39 @@ socket.on('map', function(map) {
         
         // update the border to a lighter color when inside a room
         // otherwise all other borders will be on an outside edge
-        for (near in map) {
-            var nearRoomRow = map[near][0]
-            var nearRoomCol = map[near][1]
+        for (near in mapRooms) {
+            var nearRoomRow = mapRooms[near][0]
+            var nearRoomCol = mapRooms[near][1]
             
             // remove the border when two edges meet
             if (nearRoomRow == currRoomRow - 1 && nearRoomCol == currRoomCol) {
                 document.querySelector(roomId).style.borderTop = 'none'
+                continue
             }
             
             // change to a lighter color
             if (nearRoomRow == currRoomRow + 1 && nearRoomCol == currRoomCol) {
                 document.querySelector(roomId).classList.add('active-inner-bottom')
+                continue
             }
             
             // remove the border when two edges meet
             if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol - 1) {
                 document.querySelector(roomId).style.borderLeft = 'none'
+                continue
             }
             
             // change to a lighter color
             if (nearRoomRow == currRoomRow && nearRoomCol == currRoomCol + 1) {
                 document.querySelector(roomId).classList.add('active-inner-right')
+                continue
             }
         }
     }
+    
+    socket.emit('mapStart')
+})
+
+socket.on('mapStart', function(loc) {
+    mapMoveTo(loc)
 })

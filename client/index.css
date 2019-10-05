@@ -98,9 +98,18 @@ textarea {
 
 #info #map .map-room {
     background-color: #F5EEE2;
-    padding: 2px;
-    height: 13px;
-    width: 13px;
+    
+    /* WARNING
+     * 
+     * 22px is critical for the box sizing to 
+     * maintain the same dimensions for all rooms.
+     * 
+     * Anything lower or higher will cause 
+     * the room to distort when text is added.
+     * 
+     */
+    height: 22px;
+    width: 22px;
 }
 
 #info #map .map-room.active {
@@ -114,6 +123,11 @@ textarea {
 
 #info #map .map-room.active-inner-right {
     border-right: 1px solid #C0C0C0;
+}
+
+#info #map .map-room.loc {
+    text-align: center;
+    color: #18181F;
 }
 
 #info #map #map-name {
